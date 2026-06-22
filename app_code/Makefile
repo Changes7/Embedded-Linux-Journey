@@ -1,5 +1,5 @@
 # 定义编译器 (根据你的 Ubuntu 环境，通常是这个)
-CC = arm-linux-gnueabihf-gcc
+CC = /opt/toolchain/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-gcc
 
 # 定义生成的可执行文件名称
 TARGET = mp157_app
@@ -12,7 +12,7 @@ all: $(TARGET)
 
 # 编译规则
 $(TARGET): main.c
-	$(CC) main.c -o $(TARGET) -static
+	$(CC) main.c -o $(TARGET) 
 	@echo "编译完成！生成可执行文件: $(TARGET)"
 
 # 部署规则 (将编译好的文件复制到开发板共享目录)
