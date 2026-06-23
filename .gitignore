@@ -54,5 +54,27 @@ dkms.conf
 # debug information files
 *.dwo
 
-# 忽略编译生成的可执行文件
+# ==========================================
+# STM32MP157 Mono-repo .gitignore
+# ==========================================
+
+# 1. 忽略应用层 (app_code) 编译生成的二进制文件
 app_code/mp157_app
+app_code/key_app
+
+# 2. 忽略内核驱动 (driver_code) 编译产生的冗余文件
+driver_code/*.o
+driver_code/*.ko
+driver_code/*.mod
+driver_code/*.mod.c
+driver_code/*.mod.o
+driver_code/.*.cmd
+driver_code/modules.order
+driver_code/Module.symvers
+driver_code/.tmp_versions/
+
+# 3. 忽略可能的编辑器缓存 (VS Code / Cursor)
+.vscode/
+.cursor/
+*.swp
+*~

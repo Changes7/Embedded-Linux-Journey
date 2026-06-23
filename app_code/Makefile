@@ -1,26 +1,26 @@
-# 定义编译器 (根据你的 Ubuntu 环境，通常是这个)
 CC = /opt/toolchain/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-gcc
-
-# 定义生成的可执行文件名称
-TARGET = mp157_app
-
-# 定义你的 NFS 共享目录路径 (根据你之前的截图填写的)
 NFS_DIR = ~/nfs_rootfs
 
-# 默认编译目标
-all: $(TARGET)
+# 定义多个编译目标，让你的 Mono-repo 更加专业！
+TARGETS = mp157_app key_app
 
-# 编译规则
-$(TARGET): main.c
-	$(CC) main.c -o $(TARGET) 
-	@echo "编译完成！生成可执行文件: $(TARGET)"
+all: $(TARGETS)
 
-# 部署规则 (将编译好的文件复制到开发板共享目录)
-deploy: $(TARGET)
-	cp $(TARGET) $(NFS_DIR)/
-	@echo "部署完成！已复制到 $(NFS_DIR)"
+# 目标一：LED 命令行控制程序
+mp157_app: main.c
+	$(CC) main.c -o mp157_app
+	@echo "编译完成：mp157_app"
 
-# 清理规则 (删除编译产物，保持代码库整洁)
+# 目标二：按键事件监听程序
+key_app: key_test.c
+	$(CC) key_test.c -o key_app
+	@echo "编译完成：key_app"
+
+# 部署规则：一键将所有可执行文件打包复制到共享目录
+deploy: $(TARGETS)
+	cp $(TARGETS) $(NFS_DIR)/
+	@echo "部署完成！已将所有可执行文件复制到 $(NFS_DIR)/"
+
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGETS)
 	@echo "清理完成！"
