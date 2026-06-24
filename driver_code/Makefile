@@ -1,5 +1,8 @@
-# 1. 声明要编译的目标模块。kbuild 引擎会自动寻找对应的 hello_driver.c 编译为 .ko
+# 1. 声明要编译的目标模块
 obj-m += hello_driver.o
+obj-m += my_device_driver.o
+
+KO_TARGETS = hello_driver.ko my_device_driver.ko
 
 # 2. 定义开发板对应的 Linux 内核源码树目录（非常关键！）
 # ⚠️ 编译内核模块必须依赖已经配置、编译过的内核源码。
@@ -20,7 +23,7 @@ all:
 
 # 一键部署：把编译好的 .ko 驱动直接推送到共享目录
 deploy: all
-	cp hello_driver.ko ~/nfs_rootfs/
+	cp $(KO_TARGETS) ~/nfs_rootfs/
 	@echo "部署完成！.ko 文件已成功复制到 ~/nfs_rootfs/ 目录"
 
 clean:
