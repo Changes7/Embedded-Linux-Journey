@@ -4,7 +4,8 @@
 # ─── 工具链配置 ───────────────────────────────────────────────────────
 CC      = /opt/toolchain/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-gcc
 CFLAGS  = -Wall -Wextra -O2 -I./include -I./third_party/cJSON -MMD -MP
-LDFLAGS = -lpthread -lpaho-mqtt3c  # 提前加上了MQTT库，以后直接用
+LDFLAGS = -lpthread
+# LDFLAGS += -lpaho-mqtt3c  # 阶段 3 移植 MQTT 后再启用
 
 # ─── 目录定义 ─────────────────────────────────────────────────────────
 SRC_DIR     = src

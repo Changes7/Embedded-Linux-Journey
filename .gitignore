@@ -78,3 +78,5 @@ driver_code/.tmp_versions/
 .cursor/
 *.swp
 *~
+projects/iot_dashboard/build/iot_dashboard
+projects/iot_dashboard/third_party/paho.mqtt.c/
